@@ -1,3 +1,97 @@
 form {
-  font-family: fantasy;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  max-width: 380px;
+}
+
+.form-title {
+  font-size: 1.3rem;
+  margin: 10px 0;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+textarea {
+  resize: none;
+}
+
+select {
+  color: rgb(70, 70, 70);
+}
+
+.label {
+  color: rgb(70, 70, 70);
+  display: flex;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.form-item {
+  background-color: white;
+  border: none;
+  border-radius: 2px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+  padding: 8px;
+}
+
+.label-top {
+  flex-direction: column;
+}
+
+.label-aside {
+  align-items: center;
+}
+
+.label-top span {
+  margin-bottom: 10px;
+}
+
+.label-aside span {
+  margin-right: 10px;
+}
+
+.label-top .form-item {
+  border-bottom: 2px solid rgb(143, 143, 143);
+  flex-grow: 1;
+}
+
+.label-aside .form-item {
+  border: 2px solid rgb(143, 143, 143);
+  flex-basis: 280px;
+}
+
+.attr {
+  justify-content: space-between;
+}
+
+.checkbox {
+  margin-top: 15px;
+}
+
+.checkbox input {
+  accent-color: rgb(255, 45, 63);
+  margin-right: 10px;
+}
+
+.btn {
+  align-self: center;
+  background-color: rgb(255, 45, 63);
+  color: aliceblue;
+  font-weight: 600;
+  margin-top: 15px;
+  width: 80px;
+}
+
+.btn:hover {
+  background-color: rgb(255, 75, 90);
+}
+
+.select-item {
+  color: rgb(255, 45, 63);
+  font-weight: 700;
 }

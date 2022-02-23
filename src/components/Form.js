@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/Form.css';
 
 class Form extends React.Component {
   render() {
@@ -9,11 +10,12 @@ class Form extends React.Component {
 
     return (
       <>
-        <h2>Adicionar nova carta</h2>
+        <h2 className="form-title">Adicionar nova carta</h2>
         <form>
-          <label htmlFor="name-input" className="label-top">
+          <label htmlFor="name-input" className="label label-top">
             <span>Nome</span>
             <input
+              className="form-item"
               type="text"
               data-testid="name-input"
               id="name-input"
@@ -21,18 +23,20 @@ class Form extends React.Component {
               onChange={ onInputChange }
             />
           </label>
-          <label htmlFor="description-input" className="label-top">
+          <label htmlFor="description-input" className="label label-top">
             <span>Descrição</span>
             <textarea
+              className="form-item"
               data-testid="description-input"
               id="description-input"
               value={ cardDescription }
               onChange={ onInputChange }
             />
           </label>
-          <label htmlFor="attr1-input" className="label-aside">
+          <label htmlFor="attr1-input" className="label label-aside attr">
             <span>Atributo 01</span>
             <input
+              className="form-item"
               type="number"
               data-testid="attr1-input"
               id="attr1-input"
@@ -40,9 +44,10 @@ class Form extends React.Component {
               onChange={ onInputChange }
             />
           </label>
-          <label htmlFor="attr2-input" className="label-aside">
+          <label htmlFor="attr2-input" className="label label-aside attr">
             <span>Atributo 02</span>
             <input
+              className="form-item"
               type="number"
               data-testid="attr2-input"
               id="attr2-input"
@@ -50,9 +55,10 @@ class Form extends React.Component {
               onChange={ onInputChange }
             />
           </label>
-          <label htmlFor="attr3-input" className="label-aside">
+          <label htmlFor="attr3-input" className="label label-aside attr">
             <span>Atributo 03</span>
             <input
+              className="form-item"
               type="number"
               data-testid="attr3-input"
               id="attr3-input"
@@ -60,9 +66,10 @@ class Form extends React.Component {
               onChange={ onInputChange }
             />
           </label>
-          <label htmlFor="image-input" className="label-aside">
+          <label htmlFor="image-input" className="label label-aside">
             <span>Imagem</span>
             <input
+              className="form-item"
               type="text"
               data-testid="image-input"
               id="image-input"
@@ -70,9 +77,10 @@ class Form extends React.Component {
               onChange={ onInputChange }
             />
           </label>
-          <label htmlFor="rare-input" className="label-top">
+          <label htmlFor="rare-input" className="label label-top">
             <span>Raridade</span>
             <select
+              className="form-item select-item"
               data-testid="rare-input"
               id="rare-input"
               value={ cardRare }
@@ -83,7 +91,7 @@ class Form extends React.Component {
               <option value="muito raro">Muito raro</option>
             </select>
           </label>
-          <label htmlFor="trunfo-input" className="label-aside">
+          <label htmlFor="trunfo-input" className="label label-aside checkbox">
             <input
               type="checkbox"
               data-testid="trunfo-input"
@@ -91,11 +99,12 @@ class Form extends React.Component {
               checked={ cardTrunfo }
               onChange={ onInputChange }
             />
+            <span>Super Trybe Trunfo</span>
           </label>
           <button
             type="button"
             data-testid="save-button"
-            className="btn"
+            className="btn form-item"
             disabled={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
           >
