@@ -32,7 +32,7 @@ class App extends React.Component {
     this.setState({ [name]: value });
     this.setState((prevState) => (type === 'number'
       ? { isSaveButtonDisabled: !this.validAttrValues(prevState) }
-      : { isSaveButtonDisabled: !value.trim() }));
+      : { isSaveButtonDisabled: !value }));
   }
 
   handleClick() {
