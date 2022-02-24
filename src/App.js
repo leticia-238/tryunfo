@@ -5,7 +5,8 @@ import Card from './components/Card';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
+
+    this.defaultValues = {
       cardName: '',
       cardDescription: '',
       cardAttr1: '0',
@@ -15,6 +16,10 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
+    };
+
+    this.state = {
+      ...this.defaultValues,
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -31,7 +36,7 @@ class App extends React.Component {
   }
 
   handleClick() {
-    //
+    this.setState({ ...this.defaultValues });
   }
 
   validAttrValues({ cardAttr1, cardAttr2, cardAttr3 }) {
