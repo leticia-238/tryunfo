@@ -87,6 +87,7 @@ class App extends React.Component {
           />
         </section>
         <section className="section-card-preview">
+          <h2 className="title">Pré-visualização</h2>
           <Card
             cardName={ cardName }
             cardDescription={ cardDescription }

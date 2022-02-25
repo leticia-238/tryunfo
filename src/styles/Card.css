@@ -1,0 +1,30 @@
+.card {
+  aspect-ratio: 2 / 3;
+  background-color: rgb(248, 248, 248);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgb(154, 171, 204);
+  justify-content: center;
+  margin: 10px auto;
+  max-width: 300px;
+  padding: calc(4%);
+}
+
+.card-border {
+  background-color: rgb(86, 129, 167);
+  border-radius: inherit;
+  height: 100%;
+  padding: calc(4%);
+  width: 100%;
+}
+
+.card-title {
+  background-color: aqua;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  display: block;
+  font-size: 1.5rem;
+  height: 2rem;
+  padding: 0 5px;
+  text-align: end;
+  width: 100%;
+}

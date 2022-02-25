@@ -23,6 +23,7 @@ main {
 
 .section-card-preview {
   background-color: rgb(218, 205, 253);
+  padding: 20px;
 }
 
 .section-cards {
