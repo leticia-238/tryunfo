@@ -11,9 +11,8 @@ body {
 
 main {
   display: grid;
-  gap: 10px;
+  gap: 5px;
   grid-template-columns: 1fr 1fr;
-  padding: 10px;
 }
 
 .section-form {
