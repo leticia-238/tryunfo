@@ -10,8 +10,8 @@ class Form extends React.Component {
       onInputChange, onSaveButtonClick } = this.props;
 
     return (
-      <>
-        <h2 className="form-title">Adicionar nova carta</h2>
+      <div className="container-form">
+        <h2 className="title">Adicionar nova carta</h2>
         <form>
           <label htmlFor="name-input" className="label label-top">
             <span>Nome</span>
@@ -36,7 +36,7 @@ class Form extends React.Component {
               onChange={ onInputChange }
             />
           </label>
-          <label htmlFor="attr1-input" className="label label-aside attr">
+          <label htmlFor="attr1-input" className="label label-aside">
             <span>Atributo 01</span>
             <input
               className="form-item"
@@ -48,7 +48,7 @@ class Form extends React.Component {
               onChange={ onInputChange }
             />
           </label>
-          <label htmlFor="attr2-input" className="label label-aside attr">
+          <label htmlFor="attr2-input" className="label label-aside">
             <span>Atributo 02</span>
             <input
               className="form-item"
@@ -60,7 +60,7 @@ class Form extends React.Component {
               onChange={ onInputChange }
             />
           </label>
-          <label htmlFor="attr3-input" className="label label-aside attr">
+          <label htmlFor="attr3-input" className="label label-aside">
             <span>Atributo 03</span>
             <input
               className="form-item"
@@ -72,7 +72,7 @@ class Form extends React.Component {
               onChange={ onInputChange }
             />
           </label>
-          <label htmlFor="image-input" className="label label-aside">
+          <label htmlFor="image-input" className="label label-aside field-image">
             <span>Imagem</span>
             <input
               className="form-item"
@@ -100,7 +100,11 @@ class Form extends React.Component {
             </select>
           </label>
           { hasTrunfo
-            ? <span>Você já tem um Super Trunfo em seu baralho</span>
+            ? (
+              <span className="text-trunfo">
+                Você já tem um Super Trunfo em seu baralho
+              </span>
+            )
             : (
               <TrunfoCheckbox cardTrunfo={ cardTrunfo } onInputChange={ onInputChange } />
             )}
@@ -115,7 +119,7 @@ class Form extends React.Component {
           </button>
 
         </form>
-      </>
+      </div>
     );
   }
 }

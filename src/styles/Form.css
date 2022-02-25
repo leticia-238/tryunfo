@@ -1,13 +1,15 @@
-form {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.9rem;
+.container-form {
+  background-color: inherit;
+  margin: auto;
   max-width: 380px;
 }
 
-.form-title {
-  font-size: 1.3rem;
-  margin: 10px 0;
+form {
+  color: rgb(58, 58, 58);
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
@@ -18,25 +20,9 @@ textarea {
   resize: none;
 }
 
-select {
-  color: rgb(70, 70, 70);
-}
-
 .label {
-  color: rgb(70, 70, 70);
   display: flex;
-  font-weight: 700;
   margin: 5px 0;
-}
-
-.form-item {
-  background-color: white;
-  border: none;
-  border-radius: 2px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  outline: none;
-  padding: 5px;
 }
 
 .label-top {
@@ -45,6 +31,17 @@ select {
 
 .label-aside {
   align-items: center;
+  justify-content: space-between;
+}
+
+.form-item {
+  background-color: white;
+  border: none;
+  border-radius: 2px;
+  font-size: inherit;
+  font-weight: 500;
+  outline: none;
+  padding: 5px;
 }
 
 .label-top span {
@@ -52,6 +49,7 @@ select {
 }
 
 .label-aside span {
+  flex-grow: 1;
   margin-right: 10px;
 }
 
@@ -65,17 +63,12 @@ select {
   flex-basis: 280px;
 }
 
-.attr {
-  justify-content: space-between;
+.field-image .form-item {
+  margin: 0 10px;
 }
 
-.checkbox {
-  margin-top: 15px;
-}
-
-.checkbox input {
-  accent-color: rgb(255, 45, 63);
-  margin-right: 10px;
+.label .form-item:focus {
+  background-color: whitesmoke;
 }
 
 .btn {
@@ -83,7 +76,7 @@ select {
   background-color: rgb(255, 45, 63);
   color: aliceblue;
   font-weight: 600;
-  margin-top: 15px;
+  margin: 10px 0;
   width: 80px;
 }
 
@@ -93,13 +86,25 @@ select {
 
 .select-item {
   color: rgb(255, 45, 63);
-  font-weight: 700;
-}
-
-.label .form-item:focus {
-  background-color: whitesmoke;
+  font: inherit;
 }
 
 option {
   font-weight: 600;
+}
+
+.text-trunfo {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px;
+  text-align: center;
+}
+
+.field-trunfo {
+  margin: 10px 0;
+}
+
+.field-trunfo input {
+  accent-color: rgb(255, 45, 63);
+  margin-right: 10px;
 }

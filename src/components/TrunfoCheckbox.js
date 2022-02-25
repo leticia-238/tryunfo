@@ -8,7 +8,7 @@ class TrunfoCheckbox extends React.Component {
     return (
       <label
         htmlFor="trunfo-input"
-        className="label label-aside checkbox"
+        className="label label-aside field-trunfo"
       >
         <input
           type="checkbox"

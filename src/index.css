@@ -6,6 +6,34 @@
 }
 
 body {
-  background-color: rgb(245, 245, 245);
+  background-color: whitesmoke;
 }
 
+main {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px;
+}
+
+.section-form {
+  background-color: rgb(247, 247, 247);
+  padding: 20px;
+}
+
+.section-card-preview {
+  background-color: rgb(218, 205, 253);
+}
+
+.section-cards {
+  background-color: #b59ad4;
+  grid-column: 1 / span 2;
+  height: 500px;
+}
+
+.title {
+  color: rgb(34, 34, 34);
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 10px 0;
+}
