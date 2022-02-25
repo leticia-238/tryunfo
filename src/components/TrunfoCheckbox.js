@@ -25,7 +25,7 @@ class TrunfoCheckbox extends React.Component {
 }
 
 TrunfoCheckbox.propTypes = {
-  cardTrunfo: PropTypes.string.isRequired,
+  cardTrunfo: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
 };
 

@@ -99,11 +99,11 @@ class Form extends React.Component {
               <option value="muito raro">Muito raro</option>
             </select>
           </label>
-          { hasTrunfo ? <TrunfoCheckbox
-            cardTrunfo={ cardTrunfo }
-            onInputChange={ onInputChange }
-          />
-            : 'Você já tem um Super Trunfo em seu baralho'}
+          { hasTrunfo
+            ? <span>Você já tem um Super Trunfo em seu baralho</span>
+            : (
+              <TrunfoCheckbox cardTrunfo={ cardTrunfo } onInputChange={ onInputChange } />
+            )}
           <button
             type="button"
             data-testid="save-button"
