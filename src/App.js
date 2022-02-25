@@ -14,13 +14,14 @@ class App extends React.Component {
       cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
-      hasTrunfo: false,
-      cardTrunfo: false,
       isSaveButtonDisabled: true,
     };
 
     this.state = {
       ...this.defaultValues,
+      cardList: [],
+      hasTrunfo: false,
+      cardTrunfo: false,
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -39,11 +40,15 @@ class App extends React.Component {
   }
 
   handleClick() {
-    this.setState(({ cardTrunfo }) => (
-      cardTrunfo
-        ? { ...this.defaultValues, hasTrunfo: cardTrunfo, cardTrunfo }
-        : { ...this.defaultValues }
-    ));
+    this.setState((prevState) => {
+      const { cardTrunfo, cardList } = prevState;
+      return {
+        ...this.defaultValues,
+        hasTrunfo: cardTrunfo,
+        cardTrunfo: false,
+        cardList: [...cardList, prevState],
+      };
+    });
   }
 
   validInputValues({ cardName, cardDescription, cardImage }) {
@@ -67,7 +72,8 @@ class App extends React.Component {
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled } = this.state;
+      cardImage, cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled,
+      cardList } = this.state;
     return (
       <main>
         <section className="section-form">
@@ -99,7 +105,23 @@ class App extends React.Component {
             cardTrunfo={ cardTrunfo }
           />
         </section>
-        <section className="section-cards" />
+        <section className="section-cards">
+          { cardList.length > 0
+            ? cardList.map((dataCard, index) => (
+              <Card
+                key={ index }
+                cardName={ dataCard.cardName }
+                cardDescription={ dataCard.cardDescription }
+                cardAttr1={ dataCard.cardAttr1 }
+                cardAttr2={ dataCard.cardAttr2 }
+                cardAttr3={ dataCard.cardAttr3 }
+                cardImage={ dataCard.cardImage }
+                cardRare={ dataCard.cardRare }
+                cardTrunfo={ dataCard.cardTrunfo }
+              />
+            ))
+            : 'oo'}
+        </section>
       </main>
     );
   }
