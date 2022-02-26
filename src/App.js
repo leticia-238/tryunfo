@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import CardBox from './components/CardBox';
 
 class App extends React.Component {
   constructor() {
@@ -14,6 +15,7 @@ class App extends React.Component {
       cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
+      cardTrunfo: false,
       isSaveButtonDisabled: true,
     };
 
@@ -25,7 +27,8 @@ class App extends React.Component {
     };
 
     this.handleInput = this.handleInput.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.saveCard = this.saveCard.bind(this);
+    this.deleteCard = this.deleteCard.bind(this);
   }
 
   handleInput({ target }) {
@@ -39,16 +42,15 @@ class App extends React.Component {
     });
   }
 
-  handleClick() {
-    this.setState((prevState) => {
-      const { cardTrunfo, cardList } = prevState;
-      return {
-        ...this.defaultValues,
-        hasTrunfo: cardTrunfo,
-        cardTrunfo: false,
-        cardList: [...cardList, prevState],
-      };
-    });
+  saveCard() {
+    this.setState((prevState) => (
+      { cardList: [...prevState.cardList, prevState] }
+    ));
+    this.setState(({ cardTrunfo }) => (
+      cardTrunfo
+        ? { hasTrunfo: true, ...this.defaultValues }
+        : { ...this.defaultValues }
+    ));
   }
 
   validInputValues({ cardName, cardDescription, cardImage }) {
@@ -70,6 +72,13 @@ class App extends React.Component {
     && validAttr(cardAttr3) && sum <= maxSumValue;
   }
 
+  deleteCard(key, cardTrunfo) {
+    this.setState(({ cardList }) => {
+      const newList = cardList.filter(({ cardName }) => cardName !== key);
+      return { cardList: newList, hasTrunfo: !cardTrunfo };
+    });
+  }
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled,
@@ -89,7 +98,7 @@ class App extends React.Component {
             hasTrunfo={ hasTrunfo }
             isSaveButtonDisabled={ isSaveButtonDisabled }
             onInputChange={ this.handleInput }
-            onSaveButtonClick={ this.handleClick }
+            onSaveButtonClick={ this.saveCard }
           />
         </section>
         <section className="section-card-preview">
@@ -107,17 +116,11 @@ class App extends React.Component {
         </section>
         <section className="section-cards">
           { cardList.length > 0
-            ? cardList.map((dataCard, index) => (
-              <Card
-                key={ index }
-                cardName={ dataCard.cardName }
-                cardDescription={ dataCard.cardDescription }
-                cardAttr1={ dataCard.cardAttr1 }
-                cardAttr2={ dataCard.cardAttr2 }
-                cardAttr3={ dataCard.cardAttr3 }
-                cardImage={ dataCard.cardImage }
-                cardRare={ dataCard.cardRare }
-                cardTrunfo={ dataCard.cardTrunfo }
+            ? cardList.map((dataCard) => (
+              <CardBox
+                key={ dataCard.cardName }
+                dataCard={ dataCard }
+                deleteCard={ this.deleteCard }
               />
             ))
             : 'oo'}
