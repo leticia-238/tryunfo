@@ -97,8 +97,12 @@ class App extends React.Component {
     this.setState(({ cardList, nameFilter, rareFilter, trunfoFilter }) => {
       const selectedFilter = filter === 'trunfoFilter'
         ? ({ cardTrunfo }) => (cardTrunfo)
-        : ({ cardName, cardRare }) => cardName.startsWith(nameFilter)
-    && (cardRare === rareFilter || rareFilter === 'todas');
+        : ({ cardName, cardRare }) => {
+          const re = new RegExp(nameFilter, 'i');
+
+          return (cardName.search(re) > 0 || nameFilter.trim().length === 0)
+          && (cardRare === rareFilter || rareFilter === 'todas');
+        };
 
       return {
         filterCardlist: cardList.filter(selectedFilter),
