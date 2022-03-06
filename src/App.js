@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import CardBox from './components/CardBox';
+import SearchFilters from './components/SearchFilters';
 
 class App extends React.Component {
   constructor() {
@@ -24,17 +25,27 @@ class App extends React.Component {
       cardList: [],
       hasTrunfo: false,
       cardTrunfo: false,
+      nameFilter: '',
+      rareFilter: 'todas',
+      trunfoFilter: false,
+      isDisabled: false,
+      filterCardlist: [],
     };
 
     this.handleInput = this.handleInput.bind(this);
     this.saveCard = this.saveCard.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
+    this.validFormInputs = this.validFormInputs.bind(this);
+    this.filter = this.filter.bind(this);
   }
 
-  handleInput({ target }) {
+  handleInput(target) {
     const { name, type } = target;
     const value = type === 'checkbox' ? target.checked : target.value;
     this.setState({ [name]: value });
+  }
+
+  validFormInputs() {
     this.setState((prevState) => {
       const validInput = this.validInputValues(prevState)
         && this.validAttrValues(prevState);
@@ -43,9 +54,10 @@ class App extends React.Component {
   }
 
   saveCard() {
-    this.setState((prevState) => (
-      { cardList: [...prevState.cardList, prevState] }
-    ));
+    this.setState((prevState) => {
+      const newList = [...prevState.cardList, prevState];
+      return { cardList: newList, filterCardlist: newList };
+    });
     this.setState(({ cardTrunfo }) => (
       cardTrunfo
         ? { hasTrunfo: true, ...this.defaultValues }
@@ -55,8 +67,10 @@ class App extends React.Component {
 
   validInputValues({ cardName, cardDescription, cardImage }) {
     const validInput = (input) => input.trim().length > 0;
+    const { cardList } = this.state;
     return validInput(cardName) && validInput(cardDescription)
-    && validInput(cardImage);
+    && validInput(cardImage)
+    && !cardList.find((dataCard) => dataCard.cardName === cardName);
   }
 
   validAttrValues({ cardAttr1, cardAttr2, cardAttr3 }) {
@@ -75,14 +89,30 @@ class App extends React.Component {
   deleteCard(key, cardTrunfo) {
     this.setState(({ cardList }) => {
       const newList = cardList.filter(({ cardName }) => cardName !== key);
-      return { cardList: newList, hasTrunfo: !cardTrunfo };
+      return { cardList: newList, filterCardlist: newList, hasTrunfo: !cardTrunfo };
+    });
+  }
+
+  filter(filter) {
+    this.setState(({ cardList, nameFilter, rareFilter, trunfoFilter }) => {
+      const selectedFilter = filter === 'trunfoFilter'
+        ? ({ cardTrunfo }) => (cardTrunfo)
+        : ({ cardName, cardRare }) => cardName.startsWith(nameFilter)
+    && (cardRare === rareFilter || rareFilter === 'todas');
+
+      return {
+        filterCardlist: cardList.filter(selectedFilter),
+        isDisabled: trunfoFilter,
+      };
     });
   }
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled,
-      cardList } = this.state;
+      cardList, nameFilter, rareFilter, trunfoFilter, isDisabled,
+      filterCardlist } = this.state;
+
     return (
       <main>
         <section className="section-form">
@@ -97,7 +127,10 @@ class App extends React.Component {
             cardTrunfo={ cardTrunfo }
             hasTrunfo={ hasTrunfo }
             isSaveButtonDisabled={ isSaveButtonDisabled }
-            onInputChange={ this.handleInput }
+            onInputChange={ ({ target }) => {
+              this.handleInput(target);
+              this.validFormInputs();
+            } }
             onSaveButtonClick={ this.saveCard }
           />
         </section>
@@ -115,8 +148,18 @@ class App extends React.Component {
           />
         </section>
         <section className="section-cards">
+          <SearchFilters
+            nameFilter={ nameFilter }
+            rareFilter={ rareFilter }
+            onInputChange={ ({ target }) => {
+              this.handleInput(target);
+              this.filter(target.name);
+            } }
+            trunfoFilter={ trunfoFilter }
+            isDisabled={ isDisabled }
+          />
           { cardList.length > 0
-            ? cardList.map((dataCard) => (
+            ? filterCardlist.map((dataCard) => (
               <CardBox
                 key={ dataCard.cardName }
                 dataCard={ dataCard }
